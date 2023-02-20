@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; min-height:900px">
+    <div class="container mb-3 p-3" style="color:#F9ED69">
+        <div class="row text-center">
+            <h1>Notifications</h1>
+        </div>
+        <div class="row p-1">
+            <p style="font-size:22px"><strong>Feedback</strong></p>
+        </div>
+        <div class="row p-1 ">
+            <div class="col-12">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Content</th>
+                            <th>Posted by</th>
+                            <th>Status</th>
+                            <th>Resolve Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for feedback in feedbacks %}
+                            {% if feedback.solved != 'Resolved' %}
+                                <tr>
+                                    <th>{{ feedback.id }}</th>
+                                    <th>{{ feedback.title }}</th>
+                                    <th>{{ feedback.category }}</th>
+                                    <th>{{ feedback.content }}</th>
+                                    <th>{{ feedback.user_id }}</th>
+                                    <th>{{ feedback.solved }} </th>
+                                    <th>
+                                        <a href="{{ url_for('feedbacks.feedback_resolution', feedback_id=feedback.id) }}" class="btn btn-primary">Resolve</a>
+                                    </th>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br></br>
+        <div class="row p-1">
+            <p style="font-size:22px"><strong>Restaurant User Approvals</strong></p>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table text-center" style="color:black">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Restaurant</th>
+                            <th>Address</th>
+                            <th>Status</th>
+                            <th>Resolve Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for restaurant in restaurant_users %}
+                            <tr>
+                                <th>{{ restaurant.id }}</th>
+                                <th>{{ restaurant.user_id }}</th>
+                                <th>{{ restaurant.name }}</th>
+                                <th>{{ restaurant.restaurant }}</th>
+                                <th>{{ restaurant.address }}</th>
+                                <th>{{ restaurant.status }}</th>
+                                <th>
+                                    <a href="{{ url_for('applications.user_approval', restaurant_user_id=restaurant.id)}}" class="btn btn-primary">Resolve</a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

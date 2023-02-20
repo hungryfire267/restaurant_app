@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3 text-center">
+        <br></br>
+        <h1>Welcome to My.Restaurant.Reviews.</h1>
+        <br></br>
+        <p style="font-size:24px">
+            <em>A place where you can search the reviews of dishes of restaurants within one click.</em>
+        </p>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69">
+    <div class="container p-3 text-center">
+        <p style="font-size:30px">Find details of your favourite restaurant</p>
+        <p style="font-size:24px">Including where the restaurant is located, images related to a certain dish and reviews and everything in between.</p>
+        <br></br>
+        <p style="font-size:18px">A sample of the restaurant in which a user post a review of the restaurant and the restaurant responds</p>
+        <div class="container p-3 text-center">
+            <img src="{{ url_for('static', filename='home/restaurant_review.png')}}">
+        </div>
+        <p style="font-size:18px">A sample dashboard plot that shows the most popular dishes of a particular restaurant.</p>
+        <div class="container p-3 text-center">
+            <img src="{{ url_for('static', filename='home/restaurant_dashboard.png')}}">
+        </div>
+    </div>
+</div>
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3 text-center">
+        <p style="font-size:30px">Ask for us to recommend a restaurant for you</p>
+        <p style="font-size:24px">Based on YOUR criteria such as location, cuisine and the time and date you want to dine.</p>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69">
+    <div class="container p-3 text-center">
+        <p style="font-size:30px">Find a Dish type that you like or want to eat</p>
+        <p style="font-size:24px">and get information, a image gallery and reviews of that dish type.</p>
+        <br></br>
+        <p style="font-size:18px">A sample of an overview of a dish type, Ramen, which also lists the most common dish types and the restaurants that serve the dish type.</p>
+        <div class="container p-3 text-center">
+            <img src="{{ url_for('static', filename='home/dish_type_overview.png')}}">
+        </div>
+    </div>
+</div>
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3 text-center">
+        <p style="font-size:30px">Register an account with us today</h2>
+        <br></br>
+        <p style="font-size:24px">The features listed above are just a few of many features we offer in this website. Registering an account with us
+            will allow you to use all the features above and many more for free. </p>
+        <p style="font-size:16px">
+            You need to register because we need to ensure that there our reviews aren't done by robots to ensure quality reviews for you and others to read.
+        </p>
+        <p style="font-size:16px">
+            Registering is for free and privacy information would not be disclosed by any means.
+        </p>
+        <a class="btn btn-primary" href="{{ url_for('users.register') }}">Register</a> 
+    </div>
+    <br></br>
+</div>
+{% endblock content %}

@@ -1,0 +1,73 @@
+{% extends "layout_login.html" %}
+{% block content %}
+    <br></br>
+    <br></br>
+    <div class="mx-auto p-3 rounded-3" style="width: 500px; background-color:#B83B5E; color:#F9ED69" >
+        <br></br>
+        <div class="text-center">
+            <img class="img-fluid d-inline-block align-text-top" src="{{ url_for('static', filename='reviews_logo.png')}}" style="width:600px; height:50px">
+        </div>
+        <br></br>
+        <p class="text-center" style="font-size: 18px;"><strong>Sign in with an My.Restaurant.Reviews. account</strong></p>
+        <div class="container"> 
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div>
+            <div class="mb-3 p-3">
+                <form method="post" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3 p-3">
+                        <div class="form-floating">
+                            {% if form.email.errors %}
+                                {{ form.email(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.email(class="form-control form-control-lg", placeholder="Email") }}
+                            {% endif %}
+                            {{ form.email.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="mb-3 p-3">
+                        <div class="form-floating">
+                            {% if form.password.errors %}
+                                {{ form.password(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.password(class="form-control form-control-lg",  placeholder="Password") }}
+                            {% endif %}
+                            {{ form.password.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="mb-3 p-3 text-center">
+                        {{ form.submit(class="btn btn-primary col-12")}}
+                    </div>
+                    <div class="text-center">
+                        <p style="font-size:16px; color:#F9ED69">Don't have an My.Restaurant.Reviews. account? <a href="register" style="color:#F9ED69">Sign Up</a></p>
+                    </div>
+                    <div class="text-center">
+                        <a href="{{ url_for('main.home') }}">
+                            <i class="bi bi-house" style="font-size:30px; color:#F9ED69"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br></br>
+{% endblock content %}

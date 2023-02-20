@@ -1,0 +1,164 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69; min-height:350px">
+    <div class="container p-3">
+        <div class="text-center">
+            <h1>Notifications</h1>
+        </div>
+        <div class="row p-1"> 
+            <p style="font-size:22px"><strong>User Post Replies</strong></p>
+            <p style="font-size:18px">To see the post in which the restaurant is referring to please go on the page below and
+                search the post ID in the search bar.
+            </p>
+        </div>
+        <div class="row p-1">
+            {% if replies|length == 0 %}
+                <div class="col-12">
+                    <br></br>
+                    <div class="text-center">
+                        <p style="font-size:18px"><em>No restaurant replies avaliable</em></p>
+                    </div>
+                    <br></br>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>Post ID</th>
+                                <th>Comment</th>
+                                <th>Time Posted</th>
+                                <th>Restaurant Name</th>
+                                <th>Restaurant Address</th>
+                                <th>Mark as Seen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reply in replies %}
+                                {% if replies[5] %}
+                                    ...
+                                {% else %}
+                                    <tr>
+                                        <th>{{ reply[0] }}</th>
+                                        <th>{{ reply[1] }}</th>
+                                        <th>{{ reply[2] }}</th>
+                                        <th>{{ reply[3] }}</th>
+                                        <th>{{ reply[4] }}</th>
+                                        <th>
+                                            <button class="btn btn-primary">Seen</button>
+                                        </th>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69; min-height:350px">
+    <div class="container p-3">
+        <div class="row p-1"> 
+            <p style="font-size:22px"><strong>User Feedback Replies</strong></p>
+            <p style="font-size:18px">To see full details about the content of your feedback plus the full reply from the administrator
+                please go on the page below and search the feedback ID on the search by.
+            </p>
+        </div>
+        <div class="row p-1">
+            {% if feedbacks|length == 0 %}
+                <div class="col-12">
+                    <br></br>
+                    <div class="text-center">
+                        <p style="font-size:18px"><em>No feedback responses avaliable</em></p>
+                    </div>
+                    <br></br>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>Feedback ID</th>
+                                <th>Admin response</th>
+                                <th>Admin response posted</th>
+                                <th>Feedback Title</th>
+                                <th>Feedback Category</th>
+                                <th>Feedback Status</th>
+                                <th>Mark as Seen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for feedback in feedbacks %}
+                                <tr>
+                                    <th>{{ feedback[0] }}</th>
+                                    <th>{{ feedback[1] }}</th>
+                                    <th>{{ feedback[2] }}</th>
+                                    <th>{{ feedback[3] }}</th>
+                                    <th>{{ feedback[4] }}</th>
+                                    <th>{{ feedback[5] }}</th>
+                                    <th>
+                                        <button class="btn btn-primary">Seen</button>
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div style="background-color:#B83B5E; color:#F9ED69; min-height:350px">
+    <div class="container p-3">
+        <div class="row p-1"> 
+            <p style="font-size:22px"><strong>Restaurant Application Replies</strong></p>
+            <p style="font-size:18px">To see full details about the application for a specific restaurant please go on the page below
+                and search the application ID in the search bar. 
+            </p>
+        </div>
+        <div class="row p-1">
+            {% if approvals|length == 0 %}
+                <div class="col-12">
+                    <br></br>
+                    <div class="text-center">
+                        <p style="font-size:18px"><em>No administrator responses avaliable</em></p>
+                    </div>
+                    <br></br>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>Application ID</th>
+                                <th>Restaurant Name</th>
+                                <th>Restaurant Address</th>
+                                <th>Admin Comment</th>
+                                <th>Post Time</th>
+                                <th>Approval Status</th>
+                                <th>Mark as Seen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for approval in approvals %}
+                                <tr>
+                                    <th>{{ approval[0] }}</th>
+                                    <th>{{ approval[1] }}</th>
+                                    <th>{{ approval[2] }}</th>
+                                    <th>{{ approval[3] }}</th>
+                                    <th>{{ approval[4] }}</th>
+                                    <th>{{ approval[5] }}</th>
+                                    <th>
+                                        <button class="btn btn-primary">Seen</button>
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content%}

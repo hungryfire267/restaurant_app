@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3">
+        <div class="row p-1 text-center">
+            {% if owner %}
+                <h1>My Posts</h1>
+            {% else %}
+                <h1>Posts for {{ user.username}}</h1>
+            {% endif %}
+        </div>
+        <br></br>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="row p-1">
+                <div class="col-3"></div>
+                <div class="col-4">
+                </div>
+                <div class="col-4">
+                    <div class="form-floating">
+                        {% if form.search.errors %}
+                            {{ form.search(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.search.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.search(class="form-control form-control-lg") }}
+                        {% endif %}
+                        {{ form.search.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="col-1">
+                    {{ form.submit(class="btn btn-primary")}}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69; min-height:650px">
+    <div class="container mb-3 p-3">
+        {% if post_list|length < 1 %}
+            <br></br>
+            <br></br>
+            <br></br>
+            <div class="text-center">
+                {% if owner %}
+                    <em style="font-size: 18px;">You haven't made any posts yet.</em>
+                {% else %}
+                    <em style="font-size: 18px;">{{ user.username}} hasn't made any posts yet.</em>
+                {% endif %}
+            </div>
+        {% else %}
+            {% for posts in post_list %}
+                <div class="container rounded-4 p-3">
+                    <p style="font-size:22px">Review {{ loop.index }}</p>
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 p-1">
+                            {% if posts[-4] %}
+                                <img src="{{ url_for('static', filename="user")}}/{{ user_id }}/{{ posts[-4]}}" style="width:110px; height:145px">
+                            {% else %}
+                                <img src="{{ url_for('static', filename="default_user_profile.jpg")}}" style="width:110px; height:145px">
+                            {% endif %}
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="row p-1">
+                                <h5> {{posts[2]}} <small class="text-muted"><i style="color:#F08A5D">Posted on {{ posts[7].strftime("%Y-%m-%d") }}</i></small></h5>
+                            </div>
+                            <div class="row p-1">
+                                <p style="font-size:18px"><a href="{{ url_for('restaurants.restaurant', restaurant_id=posts[0]) }}" style="text-decoration:none; color:#F9ED69">{{ posts[1] }}</a></p>
+                            </div>
+                            <div class="row p-1">
+                                <p style="font-size:18px">{{ posts[8] }} | {{ posts[11] }} | ${{ posts[5] }}</p>
+                            </div>
+                            <div class="row p-1">
+                                <p style="font-size:18px"><strong>Restaurant Rating</strong>: {{ posts[3] }}/5 | <strong>Dish Rating</strong>: {{ posts[4] }} | <strong>Value for money</strong>: {{ posts[10] }}</strong></p>
+                            </div>
+                            <div class="row p-1">
+                                <p style="font-size:18px"><strong>Upvotes</strong>: {{ posts[12] }}</p>
+                            </div>
+                            <div class="row p-1">
+                                <p style="font-size:18px">{{ posts[6] }}</p>
+                            </div>
+                            <div class="row p-1">
+                                {% if posts[-2] %}
+                                    <div class="col-3">
+                                        <a href="{{ url_for('static', filename='post')}}/{{ posts[9] }}/{{ posts[-2] }}" data-toggle="lightbox">
+                                            <img src="{{ url_for('static', filename='post')}}/{{ posts[9] }}/{{ posts[-2] }}" width="200" height="150">
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                {% if posts[-1] %}
+                                    <div class="col-3">
+                                        <a href="{{ url_for('static', filename='post')}}/{{ posts[9] }}/{{ posts[-1] }}" data-toggle="lightbox">
+                                            <img src="{{ url_for('static', filename='post')}}/{{ posts[9] }}/{{ posts[-1] }}" width="200" height="150">
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {% if posts[13] %}
+                                <div class="d-flex mt-4">
+                                    <div class="flex-shrink-0 p-1">
+                                        {% if posts[-3] %}
+                                            <img src="{{ url_for('static', filename="restaurant") }}/{{ posts[0] }}/{{ posts[-3] }}" width="100" height="100">
+                                        {% endif %}
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <div class="row p-1">
+                                            <h5>Response from the restaurant <small class="text-muted"><i style="color:#F08A5D">Posted on {{ posts[14].strftime("%Y-%m-%d") }}</i></small></h5>
+                                        </div>
+                                        <div class="row p-1">
+                                            <div class="col-6">
+                                                <p style="font-size:18px">{{ posts[13] }}</p>
+                                            </div>
+                                            <div class="col-1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <br></br>
+                    {% if owner %}
+                        <div class="row">
+                            <div class="text-center">
+                                <a href="{{ url_for('posts.edit_posts_by_id', post_id=posts[9]) }}" class="btn btn-primary">Edit Post</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <hr></hr>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

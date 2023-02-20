@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3">
+        <div class="text-center">
+            <h3>Reply to a review</h3>
+        </div>
+        <br></br>
+        <div class="d-flex">
+            <div class="flex-shrink-0 p-1">
+                {% if post[-1] %}
+                    <img src="{{ url_for('static', filename="user")}}/{{post[12]}}/{{ post[-1] }}" style="width:110px; height:145px">
+                {% else %}
+                    <img src="{{ url_for('static', filename="default_user_profile.jpg")}}" style="width:110px; height:145px">
+                {% endif %}
+            </div>
+            <div class="flex-grow-1 ms-3">
+                <div class="row p-1">
+                    <h5> {{post[0]}} <small class="text-muted"><i style="color:#F08A5D">Posted on {{ post[3].strftime("%Y-%m-%d") }}</i></small></h5>
+                </div>
+                <div class="row p-1">
+                    <p style="font-size:18px">{{ post[1] }} | {{ post[8] }} | {{ post[10] }} | ${{post[2]}}</p>
+                    <p><strong>Restaurant Rating</strong>: {{post[5]}}/5 | <strong>Dish Rating</strong>: {{ post[6]}}/5 | <strong>Value for Money</strong>: {{post[9]}}/5</p>
+                </div>
+                <div class="row p-1">
+                    <p style="font-size:18px">{{ post[4] }}</p>
+                </div>
+            </div>
+        </div>
+        <br></br>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69">
+    <div class="container p-3">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="mb-3">
+                <div class="text-center">
+                    <p style="font-size:22px"><strong>Comments</strong></p>
+                </div>
+                <div class="mb-3">
+                    {% if form.comment.errors %}
+                        {{ form.comment(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.comment(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group text-center">
+                {{ form.submit(class="btn btn-primary col-6")}}
+            </div>
+            <br></br>
+        </form>
+    </div>
+</div>
+{% endblock content %}

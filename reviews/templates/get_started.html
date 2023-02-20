@@ -1,0 +1,37 @@
+{% extends "layout_login.html" %}
+{% block content %}
+<br></br>
+<br></br>
+<div class="mx-auto p-3 rounded-3 text-center" style="width: 800px; background-color:#B83B5E; color:#F9ED69">
+    <h1>Getting Started</h1>
+    <p style="font-size:18px">It is essential for you to follow the following layout so our system process it correctly.</p>
+    <hr></hr>
+    <p style="font-size:18px">There are two things of note: the address and the phone number of the restaurant.</p>
+    <div class="container mb-3 p-3">
+        <p style="font-size:22px"><strong>The Address of the Restaurant</strong></p>
+        <p style="font-size:18px">The address of the restaurant is of this format:</p>
+        <p style="font-size:18px"><em>{address number}</em> <em>{Street Name},</em> <em>{suburb name}</em> <em>{state name}</em> <em>{postcode}</em></p>
+        <div class="container mb-3 p-3">
+            <p style="font-size:18px"><em>Example</em>: It's Time for Thai Kingsford</p>
+            <p style="font-size:18px">The <em>address</em> is: <em>2/309 Anzac Parade, Kingsford NSW 2032</em></p>
+        </div>
+    </div>
+    <div class="container mb-3 p-3">
+        <p style="font-size:22px"><strong>The Phone Number of the Restaurant</strong></p>
+        <p style="font-size:18px">Please apply the following: </p>
+        <div class="container" style="width:400px">
+            <ul style="font-size:18px">
+                <li>DO NOT enter the area code</li>
+                <li>All landline phone numbers (restaurants don't use their phone numbers) have a 8 digit number</li>
+            </ul>
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="/post_review">
+            <i class="bi bi-arrow-left" style="font-size:30px; color:#F9ED69"></i>
+        </a>
+    </div>
+</div>
+
+
+{% endblock content %}

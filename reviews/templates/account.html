@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="text-center" style="color:blue"> {{ greeting }} </h1>
+<p class="text-center" style="color:blueviolet">According to our information, you are currently in Sydney.</p>
+<p class="text-center" style="color:blueviolet">If this is not correct please change it in the form below.</p>
+<br></br>
+<hr></hr>
+<div class="container">
+    <img src="static/weather.jpg" class="weather"></img>
+    <h3 class="text-center" style="color:cornflowerblue">Weather</h3>
+    <p class="text-center" style="color:blueviolet">It is currently {{ date_string }} in {{ current_user.location }}.</p>
+    <p class="text-center" style="color:blueviolet">The current time is {{ time }}.</p>
+    <div class="row">
+        <div class="col-sm text-center">
+            <p>The weather right now is: </p>
+            <h1 class="text-center" style="color:blueviolet">{{ weather_degrees_now }}° C</h1>  
+            <p class="text-center" style="color:blueviolet"><strong>Condition :</strong> {{ weather_condition_now }}</p>
+            <p class="text-center" style="color: blueviolet"><strong>Wind Speed</strong> {{ weather_wind_now }} km/h {{ wind_dir }}</p>
+            {% if hour < 17 %}
+                <p>The weather today would be:</p>
+                <h3 style="color:rgb(49, 78, 135)">Max: {{ max_temp }}&deg;C</h3>
+            {% else %}
+                <p>The weather tomorrow would be</p>
+                <h3><span style="color:rgb(139, 179, 213)">{{min_temp}}&deg;C </span><span style="color:rgb(49, 78, 135)">{{max_temp}}&deg;C</span></h3>
+            {% endif %}
+            <p class="blueviolet">Forecasted Conditions: {{ weather_condition }}</p>
+        </div>
+    </div>
+</div>
+<hr></hr>
+<div class="container">
+    <img src="static/website.png" class="weather"></img>
+    <h3 class="text-center" style="color:cornflowerblue">Links to Webpage</h3>
+    <div class="row">
+        <div class="col-md-4 p-3 mb-3">
+            <img src="static/restaurant-icon.png" class="feedback"></img>
+        </div>
+        <div class="col-md-8 p-3 mb-3">
+            <h5>Restaurant Reviews</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 p-3 mb-3">
+            <img src="static/dish.png" class="feedback"></img>
+        </div>
+        <div class="col-md-8 p-3 mb-3">
+            <h5>Dish Reviews</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 p-3 mb-3">
+            <img src="static/account-icon.png" class="feedback"></img>
+        </div>
+        <div class="col-md-8 p-3 mb-3">
+            <h5>Account Information</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 p-3 mb-3">
+            <img src="static/data-scientist-icon.png" class="feedback"></img>
+        </div>
+        <div class="col-md-8 p-3 mb-3">
+            <h5>Account Statistics</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 p-3 mb-3">
+            <img src="static/chat-bubble-icon.png" class="feedback"></img>
+        </div>
+        <div class="col-md-8 p-3 mb-3">
+            <h5>Your Posts</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 p-3 mb-3">
+            <img src="static/feedback.png" class="feedback"></img>
+        </div>
+        <div class="col-md-8 p-3 mb-3">
+            <h5>Feedback</h5>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}

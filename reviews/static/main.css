@@ -1,0 +1,123 @@
+
+thead {
+    color: #F9ED69;
+    font-size: 22px;
+    border: 4px #F9ED69
+}
+
+tbody { 
+    color:#F9ED69;
+    font-size: 18px;
+    border: 2px #F9ED69
+}
+
+
+
+.bg-image {
+    background-size: cover;
+    image-rendering: -webkit-optimize-contrast;
+    min-height: 100vh;
+    position: relative;
+}
+
+
+.weather {
+    display: block;
+    width: 10%;
+    margin-left: auto; 
+    margin-right: auto;
+    height: auto;
+}
+
+.feedback { 
+    display: block;
+    width: 40%;
+    margin-left: auto; 
+    margin-right: auto;
+    height: auto;
+}
+
+
+.text-area {
+    width: 500px;
+    height: 300px;
+}
+
+.form-control { 
+    width: 100%;
+    color: #FF7B54;
+    background-color: #3C84AB;
+}
+
+.form-control:focus { 
+    color: #FF7B54;
+    border-color: #FF7B54;
+    box-shadow: 0 0 0 0.2rem #FF7B54;
+    background-color: #362FD9;
+}
+
+
+.form_group {
+    position: relative;
+}
+
+.form_group .form-control { 
+    left: .5rem;
+    padding: 3.5rem;
+}
+
+.restaurant { 
+    display: inline-block;
+}
+
+.icon { 
+    position: absolute;
+    top: calc(33.5%);
+    right: calc(10%);
+}
+
+.icon1 { 
+    position: absolute;
+    top: calc(56.5%);
+    right: calc(50%);
+}
+
+.input_remember { 
+    height: 30px;
+    width: 30px;
+    margin-right: 15px
+}
+
+.input_remember_label { 
+    margin-top: 5px;
+}
+
+.input_remember_space {
+    margin-top: 5px;
+    padding-left: 90px;
+}
+
+.input_remember:hover { 
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 0.4rem rgba(148, 112, 173, 0.332);
+}
+
+.square { 
+    display: inline-block;
+    width: 100px; 
+    height: 100px;
+    text-align:center;
+}
+
+.number_index { 
+    margin: 0 auto;
+    text-align:center;
+}
+
+.top {
+    top:0;
+    left:0;
+    width:100%;
+    height:60px;
+    background-color:black;
+ }

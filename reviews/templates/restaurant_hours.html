@@ -1,0 +1,710 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3">
+        <div class="text-center">
+            <h1>Restaurant Opening Hours Form for {{ restaurant.name }}</h1>
+            <p style="font-size:22px">Notes</p>
+            <p style="font-size:18px">This form assumes that your restaurant have two operating sessions usually in the morning and one at dinner (say). If your restaurant
+                has one session on a particular day simply fill the form saying open on session 1 and fill the times in. Furthermore for session 2 say
+                your restaurant is closed.
+            </p>
+            <p style="font-size:18px">If your restaurant is closed, just fill in any random time for open and close.</p>
+        </div>
+    </div>
+</div>
+<div style="background-color: #6A2C70; color:#F9ED69">
+    <div class="container p-3">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="mb-3 p-3">
+                <div class="row p-3">
+                    <p style="font-size:22px">Monday</p>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.monday_morning.errors %}
+                                {{ form.monday_morning(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.monday_morning.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.monday_morning(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.monday_morning.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.monday_morning_open.errors %}
+                                {{ form.monday_morning_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.monday_morning_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.monday_morning_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.monday_morning_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.monday_morning_close.errors %}
+                                {{ form.monday_morning_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.monday_morning_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.monday_morning_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.monday_morning_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.monday_evening.errors %}
+                                {{ form.monday_evening(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.monday_evening.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.monday_evening(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.monday_evening.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.monday_evening_open.errors %}
+                                {{ form.monday_evening_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.monday_evening_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.monday_evening_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.monday_evening_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.monday_evening_close.errors %}
+                                {{ form.monday_evening_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.monday_evening_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.monday_evening_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.monday_evening_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <p style="font-size:22px">Tuesday</p>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.tuesday_morning.errors %}
+                                {{ form.tuesday_morning(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.tuesday_morning.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.tuesday_morning(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.tuesday_morning.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.tuesday_morning_open.errors %}
+                                {{ form.tuesday_morning_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.tuesday_morning_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.tuesday_morning_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.tuesday_morning_open.label(class="form-control-label", for="floatingSelect") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.tuesday_morning_close.errors %}
+                                {{ form.tuesday_morning_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.tuesday_morning_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.tuesday_morning_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.tuesday_morning_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.tuesday_evening.errors %}
+                                {{ form.tuesday_evening(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.tuesday_evening.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.tuesday_evening(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.tuesday_evening.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.tuesday_evening_open.errors %}
+                                {{ form.tuesday_evening_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.tuesday_evening_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.tuesday_evening_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.tuesday_evening_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.tuesday_evening_close.errors %}
+                                {{ form.tuesday_evening_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.tuesday_evening_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.tuesday_evening_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.tuesday_evening_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <p style="font-size:22px">
+                        Wednesday
+                    </p>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.wednesday_morning.errors %}
+                                {{ form.wednesday_morning(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.wednesday_morning.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.wednesday_morning(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.wednesday_morning.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.wednesday_morning_open.errors %}
+                                {{ form.wednesday_morning_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.wednesday_morning_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.wednesday_morning_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.wednesday_morning_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.wednesday_morning_close.errors %}
+                                {{ form.wednesday_morning_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.wednesday_morning_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.wednesday_morning_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.wednesday_morning_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.wednesday_evening.errors %}
+                                {{ form.wednesday_evening(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.wednesday_evening.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.wednesday_evening(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.wednesday_evening.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.wednesday_evening_open.errors %}
+                                {{ form.wednesday_evening_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.wednesday_evening_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.wednesday_evening_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.wednesday_evening_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.wednesday_evening_close.errors %}
+                                {{ form.wednesday_evening_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.wednesday_evening_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.wednesday_evening_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.wednesday_evening_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <p style="font-size:22px">Thursday</p>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.thursday_morning.errors %}
+                                {{ form.thursday_morning(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.thursday_morning.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.thursday_morning(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.thursday_morning.label(class="form-control-label") }}
+                        </div>  
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.thursday_morning_open.errors %}
+                                {{ form.thursday_morning_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.thursday_morning_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.thursday_morning_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.thursday_morning_open.label(class="form-control-label") }}
+                        </div>  
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.thursday_morning_close.errors %}
+                                {{ form.thursday_morning_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.thursday_morning_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.thursday_morning_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.thursday_morning_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.thursday_evening.errors %}
+                                {{ form.thursday_evening(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.thursday_evening.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.thursday_evening(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.thursday_evening.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.thursday_evening_open.errors %}
+                                {{ form.thursday_evening_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.thursday_evening_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.thursday_evening_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.thursday_evening_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.thursday_evening_close.errors %}
+                                {{ form.thursday_evening_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.thursday_evening_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.thursday_evening_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.thursday_evening_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <p style="font-size:22px">Friday</p>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.friday_morning.errors %}
+                                {{ form.friday_morning(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.friday_morning.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.friday_morning(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.friday_morning.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.friday_morning_open.errors %}
+                                {{ form.friday_morning_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.friday_morning_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.friday_morning_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.friday_morning_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.friday_morning_close.errors %}
+                                {{ form.friday_morning_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.friday_morning_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.friday_morning_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.friday_morning_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.friday_evening.errors %}
+                                {{ form.friday_evening(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.friday_evening.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.friday_evening(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.friday_evening.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.friday_evening_open.errors %}
+                                {{ form.friday_evening_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.friday_evening_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.friday_evening_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.friday_evening_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.friday_evening_close.errors %}
+                                {{ form.friday_evening_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.friday_evening_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.friday_evening_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.friday_evening_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <p style="font-size:22px">Saturday</p>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.saturday_morning.errors %}
+                                {{ form.saturday_morning(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.saturday_morning.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.saturday_morning(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.saturday_morning.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.saturday_morning_open.errors %}
+                                {{ form.saturday_morning_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.saturday_morning_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.saturday_morning_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.saturday_morning_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.saturday_morning_close.errors %}
+                                {{ form.saturday_morning_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.saturday_morning_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.saturday_morning_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.saturday_morning_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.saturday_evening.errors %}
+                                {{ form.saturday_evening(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.saturday_evening.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.saturday_evening(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.saturday_evening.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.saturday_evening_open.errors %}
+                                {{ form.saturday_evening_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.saturday_evening_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.saturday_evening_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.saturday_evening_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.saturday_evening_close.errors %}
+                                {{ form.saturday_evening_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.saturday_evening_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.saturday_evening_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.saturday_evening_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <p style="font-size:22px">Sunday</p>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.sunday_morning.errors %}
+                                {{ form.sunday_morning(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.sunday_morning.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sunday_morning(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.sunday_morning.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.sunday_morning_open.errors %}
+                                {{ form.sunday_morning_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.sunday_morning_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sunday_morning_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.sunday_morning_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.sunday_morning_close.errors %}
+                                {{ form.sunday_morning_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.sunday_morning_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sunday_morning_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.sunday_morning_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.sunday_evening.errors %}
+                                {{ form.sunday_evening(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.sunday_evening.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sunday_evening(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.sunday_evening.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.sunday_evening_open.errors %}
+                                {{ form.sunday_evening_open(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.sunday_evening_open.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sunday_evening_open(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.sunday_evening_open.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.sunday_evening_close.errors %}
+                                {{ form.sunday_evening_close(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.sunday_evening_close.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sunday_evening_close(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.sunday_evening_close.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3 p-3 text-center">
+                {{ form.submit(class="btn btn-primary col-12")}}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

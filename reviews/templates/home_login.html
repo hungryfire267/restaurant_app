@@ -1,0 +1,181 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container text-center mb-3 p-3">
+        <h1>{{ greeting }}</h1>
+        <br></br>
+    </div>
+    <div class="container text-center p-3">
+        <div class="row">
+            <div class="col">
+                <p style="font-size:18px">{{ date_string }}</p>
+                <p style="font-size:22px">{{ time }} </p>
+                <p style="font-size:18px">{{ current_user.location }}</p>
+            </div>
+            <div class="col">
+                <p style="font-size:22px">Weather right now</p>
+                <p style="font-size:18px">{{ weather_condition_now }}</p>
+                <p style="font-size:22px">{{ weather_degrees_now }} &#8451</p>
+                <p style="font-size:18px">{{ weather_wind_now }} kph {{ wind_dir }}</p>
+            </div>
+            <div class="col">
+                {% if hour < 17 %}
+                    <p style="font-size:22px">Weather today</p>
+                {% else %}
+                    <p style="font-size:22px">Weather tomorrow</p>
+                {% endif %}
+                <p style="font-size:18px">{{ weather_condition }}</p>
+                {% if hour < 17 %}
+                    <p style="font-size:22px">{{ max_temp }} &#8451</p>
+                {% else %}
+                    <p style="font-size:22px">{{ min_temp }} &#8451 {{ max_temp }} &#8451</p>
+                {% endif %}
+            </div>
+        </div>
+        <br></br>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69">
+    <div class="container p-3">
+        <div class="row p-1">
+            <p style="font-size:22px"><strong>Did you know that?</strong></p>
+        </div>
+        <div class="row p-1">
+            {% for dish in dish_types %}
+                <div class="row p-3">
+                    <div class="col-1">
+                        <p style="font-size:22px">{{ dish[0] }}</p>
+                    </div>
+                    <div class="col-3"></div>
+                    <div class="col-8">
+                        <p style="font-size:18px">{{ dish[1] }}</p>
+                    </div>
+                </div>
+                <br></br>
+                <div class="row p-3">
+                    <div class="col-1">
+                    </div>
+                    <div class="col-3"></div>
+                    <div class="col-8">
+                        <em style="font-size:18px">For more information on where to get ramen please click on this <a href="{{ url_for('dishes.dish', dish_id=dish[2])}}" style="text-decoration: none; color:#F9ED69" >link</a>.</em>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3">
+        <div class="row p-1">
+            <p style="font-size:22px"><strong>A selection of images posted</strong></p>
+        </div>
+        <div class="row p-1">
+            {% if images|length < 3 %}
+                <div class="text-center">
+                    <br></br>
+                    <br></br>
+                    <p style="font-size:18px"><em>Not enough images avaliable</em></p>
+                    <br></br>
+                    <br></br>
+                </div>
+            {% else %}
+                <div class="row justify-content-center">
+                    {% for image in images %}
+                        {% if image[1] %}
+                            <a href="{{ url_for('static', filename='post')}}/{{image[0]}}" data-toggle="lightbox" data-gallery="image_gallery" class="col-4">
+                                <img src="{{ url_for('static', filename='post')}}/{{image[0]}}" class="img-fluid" style="height:300px; width:400px;">
+                            </a>
+                        {% else %}
+                            <div data-toggle="lightbox" data-gallery="image_gallery" data-src="{{ url_for('static', filename='post')}}/{{image[0]}}"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69; min-height: 300px">
+    <div class="container p-3">
+        <div class="row p-1">
+            <p style="font-size:22px"><strong>Trending Posts</strong></p>
+        </div>
+        {% if trending_posts|length == 0 %}
+            <div class="text-center">
+                <br></br>
+                <p style="font-size:18px">There are no trending posts avaliable right now!</p>
+                <br></br>
+            </div>
+        {% else %}
+            {% for review in trending_posts %}
+                <p style="font-size:22px">Review {{ loop.index }}</p>
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        {% if review[17] %}
+                            <img src="{{ url_for('static', filename='user')}}/{{ review[15]}}/{{ review[17] }}" style="width:110px; height:145px">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='default_user_profile.jpg')}}"
+                        {% endif %}
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h5> {{review[0]}} <small class="text-muted"><i style="color:#F08A5D">Posted on {{ review[7].strftime("%Y-%m-%d") }}</i></small></h5>
+                        <div class="row">
+                            <p style="font-size:18px">
+                                {{ review[13] }}
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p style="font-size:18px">
+                                {{ review[9] }} | {{ review[11] }} | {{ review[5] }} | ${{ review[3] }}
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p style="font-size:18px">
+                                <strong>Restaurant Rating</strong>: {{ review[1] }} | <strong>Dish Rating</strong>: {{ review[2] }} | <strong>Value for Money</strong>: {{ review[4] }}/5
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p style="font-size:18px">
+                                {{ review[6] }}
+                            </p>
+                        </div>
+                        <div class="row">
+                            {% if review[-2] %}
+                                <div class="col-3">
+                                    <a href="{{ url_for('static', filename='post')}}/{{ review[14] }}/{{ review[-2] }}" data-toggle="lightbox">
+                                        <img src="{{ url_for('static', filename='post')}}/{{ review[14] }}/{{ review[-2] }}" width="200" height="150">
+                                    </a>
+                                </div>
+                            {% endif %}
+                            {% if review[-1] %}
+                                <div class="col-3">
+                                    <a href="{{ url_for('static', filename='post')}}/{{ review[14] }}/{{ review[-1] }}" data-toggle="lightbox">
+                                        <img src="{{ url_for('static', filename='post')}}/{{ review[14] }}/{{ review[-1] }}" width="200" height="150">
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <form method="post" action="">
+                            <div class="row">
+                                <input type="hidden" name="post_id" value="{{ review[14] }}"/>
+                                <div class="col-9"></div>
+                                <div class="col-1 text-center">
+                                    <button class="btn btn-primary" name="like" value="1">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                    </button>
+                                </div>
+                                <div class="col-1 text-center">{{ review[8] }}</div>
+                                <div class="col-1 text-center">
+                                    <button class="btn btn-danger" name="dislike" value="-1">
+                                        <i class="bi bi-hand-thumbs-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <br></br>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif%}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends "layout_login.html" %}
+{% block content %}
+<br></br>
+<br></br>
+<div class="container p-3 rounded-3" style="background-color:#B83B5E; color:#F9ED69; width:800px; color:#F9ED69">
+    <div class="text-center">
+        <img src="{{ url_for('static', filename='title.png')}}"></img>
+    </div>
+    <br></br>
+    <div class="text-center"> 
+        <p style="font-size:18px"><strong>Please Enter the following.</strong></p>
+    </div>
+    <div class="container p-3"> 
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="mb-3 p-3">
+                {{ form.status.label(class="form-control-label") }}
+                {% if form.status.errors %}
+                    {{ form.status(class="form-control form-control-lg is-invalid") }}  
+                    <div class="invalid-feedback">
+                        {% for error in form.status.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.status(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="mb-3 p-3">
+                {{ form.content.label(class="form-control-label") }}
+                {% if form.content.errors %}
+                    {{ form.content(class="form-control form-control-lg is-invalid") }}  
+                    <div class="invalid-feedback">
+                        {% for error in form.content.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.content(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="mb-3 p-3 text-center">
+                {{ form.submit(class="btn btn-primary col-12")}}
+            </div>
+        </form>
+    </div>
+</div>
+<br></br>
+<br></br>
+
+
+{% endblock content %}

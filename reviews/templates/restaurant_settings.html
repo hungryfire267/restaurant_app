@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color: #B83B5E;">
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <div class="container text-center rounded-3 p-3" style="background-color:#6A2C70; width:1100px; min-height:400px; color:#F9ED69">
+        <h1>Restaurant Settings for {{ restaurant.name }}</h1>
+        <div class="row p-1">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col-md-3 m-1 p-2">
+                <p style="font-size:22px">Address</p>            
+            </div>
+            <div class="col-md-5 m-1 p-2">
+                <p style="font-size:18px">{{ restaurant.address }}</p>
+            </div>
+            <div class="col-md-2 m-1 p-2">
+                <a class="btn btn-info" href="{{ url_for('restaurants.restaurant_address', restaurant_id=restaurant.id) }}" role="button">
+                    <i class="bi bi-pen"></i>
+                </a> 
+            </div>
+        </div>
+        <div class="row p-1 align-items-center">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col-md-3 m-1 p-2">
+                <p style="font-size:22px">Phone Number</p>            
+            </div>
+            <div class="col-md-5 m-1 p-2">
+                <p style="font-size:18px">{{ restaurant.phone_number }}</p>
+            </div>
+            <div class="col-md-2 m-1 p-2">
+                <a class="btn btn-info" href="{{ url_for('restaurants.restaurant_phone', restaurant_id=restaurant.id) }}" role="button">
+                    <i class="bi bi-pen"></i>
+                </a> 
+            </div>
+        </div>
+        <div class="row p-1 align-items-center">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col-md-3 m-1 p-2">
+                <p style="font-size:22px">Opening Hours</p>            
+            </div>
+            <div class="col-md-5 m-1 p-2">
+                {% if not restaurant.hour %}
+                    <p style="font-size:18px">N/A</p>
+                {% else %}
+                    {% for element in hours %}
+                        <div class="row">
+                            <div class="col">
+                                <p>{{ element[0] }}</p>
+                            </div>
+                            <div class="col">
+                                {% if element|length == 1 %}
+                                    <p>Closed</p>
+                                {% elif element|length == 3 %}
+                                    <p>{{ element[1].strftime("%H:%M") }} - {{element[2].strftime("%H:%M") }}</p>
+                                {% else %}
+                                    <p>{{ element[1].strftime("%H:%M") }} - {{element[2].strftime("%H:%M") }} 
+                                    <p>and {{ element[3].strftime("%H:%M") }} - {{element[4].strftime("%H:%M") }} </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-md-2 m-1 p-2">
+                <a class="btn btn-info" href="{{ url_for('restaurants.restaurant_hours', restaurant_id=restaurant.id) }}" role="button">
+                    <i class="bi bi-pen"></i>
+                </a> 
+            </div>
+        </div>
+        <div class="row p-1 align-items-center">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col-md-3 m-1 p-2">
+                <p style="font-size:22px">Logo</h6>            
+            </div>
+            <div class="col-md-5 m-1 p-2">
+                {% if name %}
+                    <p style="font-size:18px">{{ name }}</p>
+                {% else %}
+                    <p style="font-size:18px">restaurant_logo_default.png</p>
+                {% endif %}
+            </div>
+            <div class="col-md-2 m-1 p-2">
+                <a class="btn btn-info" href="{{ url_for('restaurants.restaurant_logo', restaurant_id=restaurant.id) }}" role="button">
+                    <i class="bi bi-pen"></i>
+                </a> 
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+</div>
+{% endblock content %}

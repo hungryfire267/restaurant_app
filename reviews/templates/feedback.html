@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container text-center p-3" style="width:800px">
+        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+        <h1>Feedback</h1>
+        <p style="font-size:18px">We will love to improve and would like your feedback.</p>
+        <p style="font-size:18px">Please let us know if</p>
+        <div class="mx-auto" style="width: 800px">
+            <ul style="font-size:18px">
+                <li>You have any suggestions in which our website works</li>
+                <li>Our websites have any bugs</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69">
+    <div class="container p-3" style="width:800px">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="mb-3">
+                <br></br>
+                <div class="mb-3">
+                    <div class="form-floating">
+                        {% if form.title.errors %}
+                            {{ form.title(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.title.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.title(class="form-control form-control-lg") }}
+                        {% endif %}
+                        {{ form.title.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-floating">
+                        {% if form.category.errors %}
+                            {{ form.category(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.category.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.category(class="form-control form-control-md") }}
+                        {% endif %}
+                        {{ form.category.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    {{ form.content.label(class="form-control-label") }}
+                    {% if form.content.errors %}
+                        {{ form.content(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.content(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary col-12")}}
+            </div>
+            <br></br>
+        </form>
+    </div>
+</div>
+{% endblock content %}

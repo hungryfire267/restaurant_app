@@ -1,0 +1,166 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3">
+        <div class="text-center">
+            <h1>Restaurant Finder</h1>
+            <div class="container" style="width:800px">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="mb-3">
+                        <legend>Form</legend>
+                        <div class="row">
+                            <div class="col mb-3 p-3">
+                                <div class="form-floating">
+                                    {% if form.date.errors %}
+                                        {{ form.date(class="form-control form-control-lg is-invalid") }}  
+                                        <div class="invalid-feedback">
+                                            {% for error in form.date.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.date(class="form-control form-control-md") }}
+                                    {% endif %}
+                                    {{ form.date.label(class="form-control-label") }}
+                                </div>
+                            </div>
+                            <div class="col mb-3 p-3">
+                                <div class="form-floating">
+                                    {% if form.time.errors %}
+                                        {{ form.time(class="form-control form-control-lg is-invalid") }}  
+                                        <div class="invalid-feedback">
+                                            {% for error in form.time.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.time(class="form-control form-control-lg") }}
+                                    {% endif %}
+                                    {{ form.time.label(class="form-control-label") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 p-3">
+                                <div class="form-floating">
+                                    {% if form.location.errors %}
+                                        {{ form.location(class="form-control form-control-lg is-invalid") }}  
+                                        <div class="invalid-feedback">
+                                            {% for error in form.content.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.location(class="form-control form-control-lg") }}
+                                    {% endif %}
+                                    {{ form.location.label(class="form-control-label") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3 p-3">
+                                <div class="form-floating">
+                                    {% if form.cuisine.errors %}
+                                        {{ form.cuisine(class="form-control form-control-lg is-invalid") }}  
+                                        <div class="invalid-feedback">
+                                            {% for error in form.cuisine.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.cuisine(class="form-control form-control-md") }}
+                                    {% endif %}
+                                    {{ form.cuisine.label(class="form-control-label") }}
+                                </div>
+                            </div>
+                            <div class="col mb-3 p-3">
+                                <div class="form-floating">
+                                    {% if form.dish_type.errors %}
+                                        {{ form.dish_type(class="form-control form-control-lg is-invalid") }}  
+                                        <div class="invalid-feedback">
+                                            {% for error in form.dish_type.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.dish_type(class="form-control form-control-lg") }}
+                                    {% endif %}
+                                    {{ form.dish_type.label(class="form-control-label") }}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-primary col-8")}}
+                    </div>
+                    <br></br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69; min-height:320px">
+    <div class="container p-3">
+        {% if outer_list is none %}
+            <div class="text-center">
+                <br></br>
+                <br></br>
+                <p style="font-size:18px"><em>You haven't submitted the form yet. Please submit the form.</em></p>
+            </div>
+        {% elif outer_list|length < 1 %}
+            <div class="text-center">
+                <br></br>
+                <br></br>
+                <p style="font-size:18px"><em>No results found. Please enter input another search result instead!</em></p>
+            </div>
+        {% else %}
+            <p style="font-size:22px">Recommended Restaurants are</p>
+            <br></br>
+            {% for element in outer_list %}
+                <p style="font-size:22px">Restaurant {{ loop.index }}</p>
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        {% if element[6] %}
+                            <img src="{{ url_for('static', filename='restaurant') }}/{{element[0]}}/{{element[6]}}" width="200" height="200">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='restaurant_logo_default.png')}}" width="200" height="200">
+                        {% endif %}
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <div class="row p-1">
+                            <h5> {{element[1]}} </h5>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col">
+                                <p style="font-size:18px">
+                                    {{ element[2] }} Restaurant
+                                </p>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-primary" href="{{ url_for('restaurants.restaurant', restaurant_id=element[0]) }}" role="button">Restaurant</a>
+                            </div>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px">
+                                {{ element[3] }}
+                            </p>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px">
+                                {{ element[4] }}
+                            </p>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px">
+                                {{ element[7] }}/5
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <br></br>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

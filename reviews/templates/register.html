@@ -1,0 +1,109 @@
+{% extends "layout_login.html" %}
+{% block content %}
+    <br></br>
+    <br></br>
+    <div class="mx-auto p-3 rounded-3" style="width: 500px; background-color:#B83B5E" >
+        <br></br>
+        <div class="text-center">
+            <img class="img-fluid d-inline-block align-text-top" src="{{ url_for('static', filename='reviews_logo.png')}}" style="width:600px; height:50px">
+        </div>
+        <br></br>
+        <p class="text-center" style="color:#F9ED69; font-size: 18px;"><strong>Register an account with My.Restaurant.Reviews.</strong></p>
+        <div style="color:#F9ED69">
+            <div class="mb-3 p-3">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="mb-3">
+                        <div class="mb-3 p-3">
+                            <div class="form-floating">
+                                {% if form.username.errors %}
+                                    {{ form.username(class="form-control form-control-lg is-invalid") }}  
+                                    <div class="invalid-feedback">
+                                        {% for error in form.username.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.username(class="form-control form-control-lg", placeholder="Username") }}
+                                {% endif %}
+                                {{ form.username.label(class="form-control-label") }}
+                            </div>
+                        </div>
+                        <div class="mb-3 p-3">
+                            <div class="form-floating">
+                                {% if form.email.errors %}
+                                    {{ form.email(class="form-control form-control-lg is-invalid") }}  
+                                    <div class="invalid-feedback">
+                                        {% for error in form.email.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.email(class="form-control form-control-lg", placeholder="Email") }}
+                                {% endif %}
+                                {{ form.email.label(class="form-control-label") }}
+                            </div>
+                        </div>
+                        <div class="mb-3 p-3">
+                            <div class="form-floating">
+                                {% if form.location.errors %}
+                                    {{ form.location(class="form-control form-control-lg is-invalid") }}  
+                                    <div class="invalid-feedback">
+                                        {% for error in form.location.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.location(class="form-control form-control-md") }}
+                                {% endif %}
+                                {{ form.location.label(class="form-control-label") }}
+                            </div>
+                        </div>
+                        <div class="mb-3 p-3">
+                            <div class="form-floating">
+                                {% if form.password.errors %}
+                                    {{ form.password(class="form-control form-control-lg is-invalid") }}  
+                                    <div class="invalid-feedback">
+                                        {% for error in form.password.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.password(class="form-control form-control-lg", placeholder="Password") }}
+                                {% endif %}
+                                {{ form.password.label(class="form-control-label") }}
+                            </div>
+                        </div>
+                        <div class="mb-3 p-3">
+                            <div class="form-floating">
+                                {% if form.confirmed_password.errors %}
+                                    {{ form.confirmed_password(class="form-control form-control-lg is-invalid") }}  
+                                    <div class="invalid-feedback">
+                                        {% for error in form.confirmed_password.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.confirmed_password(class="form-control form-control-lg", placeholder="Confirm Password") }}
+                                {% endif %}
+                                {{ form.confirmed_password.label(class="form-control-label") }}
+                            </div>
+                        </div>
+                        <div class="mb-3 p-3 text-center">
+                            {{ form.submit(class="btn btn-primary col-12")}}
+                        </div>
+                        <p style="color:#F9ED69" class="text-center">Have an Account? Click the <a href="login" style="color:#F9ED69">Login</a> button.</p>
+                        <div class="text-center">
+                            <a href="{{ url_for('main.home') }}">
+                                <i class="bi bi-house" style="font-size:30px; color:#F9ED69"></i>
+                            </a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <br></br>
+{% endblock content %}
+

@@ -1,0 +1,88 @@
+{% extends "layout.html" %} 
+{% block content %}
+<div style="background-color:#B83B5E; min-height:1100px; color:#F9ED69">
+    <div class="container p-3">
+        <div class="text-center">
+            <h1>Feedback posts for {{ current_user.username}}</h1>
+        </div>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="row p-1">
+                <div class="col-3"></div>
+                <div class="col-4">
+                </div>
+                <div class="col-4">
+                    <div class="form-floating">
+                        {% if form.search.errors %}
+                            {{ form.search(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.search.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.search(class="form-control form-control-lg") }}
+                        {% endif %}
+                        {{ form.search.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="col-1">
+                    {{ form.submit(class="btn btn-primary")}}
+                </div>
+            </div>
+        </form>
+        <br></br>
+        {% if feedbacks|length < 1 %}
+            <br></br>
+            <div class="text-center">
+                <em style="font-size: 18px;">Feedback posts not avaliable.</em>
+            </div>
+        {% else %}
+            <p style="font-size:18px"><em>All posts are sorted by date (latest date first).</em></p>
+            {% for feedback in feedbacks %}
+                <p style="font-size:22px">Feedback Post {{ loop.index }}</p>
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        {% if user_pic %}
+                            <img src="{{ url_for('static', filename='user') }}/{{ current_user.id }}/{{ user_pic }}" style="width:110px; height:145px">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='default_user_profile.jpg') }}" style="width:110px; height:145px">
+                        {% endif %}
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <div class="row p-1">
+                            <h5> {{ feedback[0] }} <small class="text-muted"><i style="color:#F08A5D">Posted on {{ feedback[4].strftime("%Y-%m-%d") }}</i></small></h5>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px">Status: {{ feedback[3] }}</p>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px">Type: {{ feedback[1] }}</p>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px">  {{ feedback[2] }}</p>
+                        </div>
+                        {% for replies in feedback[5] %}
+                            <div class="d-flex mt-4 p-1">
+                                <div class="flex-shrink-0">
+                                    <img src="{{ url_for('static', filename='default_user_profile.jpg')}}" style="width:110px; height:145px">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <div class="row p-1">
+                                        <h5> From the administrator <small class="text-muted"><i style="color:#F08A5D">Posted on {{ feedback[4].strftime("%Y-%m-%d") }}</i></small></h5>
+                                    </div>
+                                    <div class="row p-1">
+                                        <p style="font-size:18px">{{ replies[0] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <hr></hr>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

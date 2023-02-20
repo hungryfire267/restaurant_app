@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E">
+    <br></br>
+    <br></br>
+    <br></br>
+    <div class="container p-3 rounded-3" style="background-color:#6A2C70; color:#F9ED69; width: 700px">
+        <h1 class="text-center">Account Information</h1>
+        <div class="row p-1">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col md-8 m-1 p-2">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="col-md-1 m-1 p-2"></div>
+        </div>
+        <div class="row p-1">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col-md-3 m-1 p-2">
+                <p style="font-size:22px">Email</p>            
+            </div>
+            <div class="col-md-5 m-1 p-2">
+                <p style="font-size:18px">{{ current_user.email }}</p>
+            </div>
+        </div>
+        <div class="row p-1">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col-md-3 m-1 p-2">
+                <p style="font-size:22px">Username</h6>            
+            </div>
+            <div class="col-md-5 m-1 p-2">
+                <p style="font-size:18px">{{ current_user.username }}</p>
+            </div>
+            <div class="col-md-2 m-1 p-2">
+                <a class="btn btn-info" href="/edit_username" role="button">
+                    <i class="bi bi-pen"></i>
+                </a> 
+            </div>
+        </div>  
+        <div class="row p-1">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col-md-3 m-1 p-2">
+                <p style="font-size:22px">Password</p>
+            </div>
+            <div class="col-md-5 m-1 p-2">
+                <p style="font-size:18px">{{ current_user.password }}</p>
+            </div>
+            <div class="col-md-2 m-1 p-2">
+                <a class="btn btn-info" href="/edit_password" role="button">
+                    <i class="bi bi-pen"></i>
+                </a> 
+            </div>
+        </div> 
+        <div class="row p-1">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col-md-3 m-1 p-2">
+                <p style="font-size:22px">Location</p>
+            </div>
+            <div class="col-md-5 m-1 p-2">
+                <p style="font-size:18px">{{ current_user.location }}</p>
+            </div>
+            <div class="col-md-2 m-1 p-2">
+                <a class="btn btn-info" href="/edit_location" role="button">
+                    <i class="bi bi-pen"></i>
+                </a> 
+            </div>
+        </div>
+        <div class="row p-1 align-items-center">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col-md-3 m-1 p-2">
+                <p style="font-size:22px">Profile Picture</h6>
+            </div>
+            <div class="col-md-5 m-1 p-2">
+                <p style="font-size:18px">{{ profile_picture }}</p>
+            </div>
+            <div class="col-md-2 m-1 p-2">
+                <a class="btn btn-info" href="{{ url_for('users.edit_profile_picture')}}" role="button">
+                    <i class="bi bi-pen"></i>
+                </a> 
+            </div>
+        </div>
+        <div class="row p-1 align-items-center">
+            <div class="col-md-1 m-1 p-2"></div>
+            <div class="col-md-3 m-1 p-2">
+                <p style="font-size:22px">Role</h6>
+            </div>
+            <div class="col-md-5 m-1 p-2">
+                <p style="font-size:18px">{{ current_user.role }}</p>
+            </div>
+            {% if current_user.role == 'regular' %}
+                <div class="col-md-2 m-1 p-2">
+                    <a class="btn btn-info" href=" {{ url_for('applications.restaurant_app' )}}" role="button">
+                        <i class="bi bi-pen"></i>
+                    </a> 
+                </div>
+            {% endif %}
+        </div>
+        <br></br>
+        <div class="row p-1">
+            <div class="col-2"></div>
+        </div>
+        <div class="row p-1">
+            <div class="col-2"></div>
+            <div class="col-3">
+                <a class="btn btn-primary" href="{{ url_for('users.account_posts') }}" role="button">Posts</a>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-3">
+                <a class="btn btn-primary" href="{{ url_for('users.account_dashboard') }}" role="button">Dashboard</a>
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <br></br>
+    <br></br>
+</div>
+{% endblock content %}

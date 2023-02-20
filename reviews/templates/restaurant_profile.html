@@ -1,0 +1,350 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E;">
+    <div class="container p-3" style="color:#F9ED69">
+        <div class="row text-center p-3">
+            <h1>{{ name }}</h1>
+            {% if logo_name %}
+                <div>
+                    <img src="{{ url_for('static', filename='restaurant/') }}{{ restaurant.id }}/{{ logo_name }}" alt="" width="200" height="200"></img>
+                    <br></br>
+                </div>
+            {% endif %}
+            <p style="font-size:18px"> {{ cost }} · {{ type }}</p>
+            <br></br>
+            {% if overview %}
+                <p style="font-size:18px">{{ overview }}</p>
+            {% endif %}
+        </div>
+        <div class="container p-3" style="width: 1200px">
+            <div class="row p-3">
+                <div class="col text-center">
+                    <i class="fa-sharp fa-solid fa-location-dot" style="font-size:100px; color:#FFEA20"></i>
+                    <br></br>
+                    <p style="font-size:24px"><strong>FIND THEM</strong><p>
+                    <p style="font-size:18px">at</p>
+                    <p style="font-size:18px">{{ address }}</p>
+                </div>
+                {% if restaurant.hour %}
+                    <div class="col text-center">
+                        <i class="fa-solid fa-clock" style="font-size:100px; color:#FFEA20"></i>
+                        <br></br>
+                        <p style="font-size:24px"><strong>SEE THEM</strong></p>
+                        <p style="font-size:18px">during our opening hours</p>
+                        {% for element in hours %}
+                            <div class="row">
+                                <div class="col">
+                                    <p style="font-size:18px">{{ element[0] }}</p>
+                                </div>
+                                <div class="col">
+                                    {% if element|length == 1 %}
+                                        <p style="font-size:18px">Closed</p>
+                                    {% elif element|length == 3 %}
+                                        <p style="font-size:18px">{{ element[1].strftime("%H:%M") }} - {{ element[2].strftime("%H:%M") }}</p>
+                                    {% else %}
+                                        <p style="font-size:18px">{{ element[1].strftime("%H:%M") }} - {{ element[2].strftime("%H:%M") }}</p>
+                                        <p style="font-size:18px">and {{ element[3].strftime("%H:%M") }} - {{element[4].strftime("%H:%M") }} </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="col text-center">
+                    <i class="fa fa-phone" style="font-size:100px; color:#FFEA20"></i>
+                    <br></br>
+                    <p style="font-size:24px"><strong>CALL THEM</strong></p>
+                    <p style="font-size:18px">on</p>
+                    <p style="font-size:18px">{{ phone }}</p>
+                </div>
+            </div>
+        </div>
+        {% if restaurant.id == current_user.restaurant_id %}
+            <div class="text-center p-3">
+                <p style="font-size:18px">Want to change settings or add new features? Please click on the button below</p>
+                <a class="btn btn-primary" href="{{ url_for('restaurants.restaurant_settings', restaurant_id=restaurant_id) }}" role="button">Restaurant Settings</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<div class="p-3" style="background-color:#6A2C70">
+    <div class="container p-3" style="color:#F9ED69">
+        <p style="font-size:22px"><strong>A gallery of the restaurant</strong></p>
+        <div class="row p-3">
+            {% if restaurant_images|length < 3 %}
+                <div class="text-center">
+                    <p style="font-size:18px"><em>Not enough images avaliable</em></p>
+                </div>
+            {% else %}
+                {% for image in restaurant_images %}
+                    {% if image[3] %}
+                        <a href="{{ url_for('static', filename='post')}}/{{ image[0] }}/{{ image[2] }}" data-toggle="lightbox" data-gallery="hidden-images" class="col-4">
+                            <img src="{{ url_for('static', filename='post')}}/{{ image[0] }}/{{ image[2] }}" class="img-fluid" style="height:300px; width:400px;">
+                        </a>
+                    {% else %}
+                        <div data-toggle="lightbox" data-gallery="hidden-images" data-src="{{ url_for('static', filename='post')}}/{{ image[0] }}/{{ image[2] }}"></div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div style="background-color:#B83B5E">
+    <div class="container p-3" style="color:#F9ED69">
+        <p style="font-size:22px"><strong>A gallery of the dishes</strong></p>
+        <div class="row p-3">
+            {% if dish_images|length < 3 %}
+                <div class="text-center">
+                    <p style="font-size:18px"><em>Not enough images avaliable</em></p>
+                </div>
+            {% else %}
+                {% for image in dish_images %}
+                    {% if image[3] %}
+                        <a href="{{ url_for('static', filename='post')}}/{{ image[0] }}/{{ image[2] }}" data-toggle="lightbox" data-gallery="hidden-images_dishes" class="col-4">
+                            <img src="{{ url_for('static', filename='post')}}/{{ image[0] }}/{{ image[2] }}" class="img-fluid" style="height:300px; width:400px;">
+                        </a>
+                    {% else %}
+                        <div data-toggle="lightbox" data-gallery="hidden-images_dishes" data-src="{{ url_for('static', filename='post')}}/{{ image[0] }}/{{ image[2] }}"></div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div style="background-color:#6A2C70">
+    <iframe
+    width="1900"
+    height="450"
+    style="border:0"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade"
+    src={{ src }}>
+    </iframe>
+</div>
+<div class="p-3" style="background-color:#6A2C70">
+    <div class="container p-3" style="color:#F9ED69">
+        <p style="font-size:22px"><strong>Statistics</strong></p>
+        <div class="row p-3">
+            <div class="col-3"></div>
+            <div class="col-3 text-center">
+                <p style="font-size:18px">Restaurant Rating</p>
+                <h1>{{ avg_restaurant_rating }} / 5</h1>
+                <p style="font-size:18px">({{no_reviews}} reviews)</p>
+            </div>
+            <div class="col-3 text-center">
+                <p style="font-size:18px">Dish Rating</p>
+                <h1>{{ avg_dish_rating }} / 5</h1>
+                <p style="font-size:18px">({{no_reviews}} reviews)</p>
+            </div>
+        </div>
+        <div class="text-center">
+            <p style="font-size:18px">For more statistics please press the button below:</p>
+        </div>
+        <div class="text-center"> 
+            <a href="{{ url_for('restaurants.restaurant_dashboard', restaurant_id=restaurant_id) }}" class="btn btn-primary col-6">Dashboard</a>
+        </div>
+    </div>
+</div>
+<div class="p-3" style="background-color:#B83B5E">
+    <div class="container p-3" style="color:#F9ED69">
+        <p style="font-size:22px"><strong>Reviews</strong></p>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="row p-3">
+                <div class="col-3"></div>
+                <div class="col-3">
+                    <div class="form-floating">
+                        {% if form.dish.errors %}
+                            {{ form.dish(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.dish.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.dish(class="form-control form-control-lg") }}
+                        {% endif %}
+                        {{ form.dish.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-floating">
+                        {% if form.type.errors %}
+                            {{ form.type(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.type.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.type(class="form-control form-control-md") }}
+                        {% endif %}
+                        {{ form.type.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-floating">
+                        {% if form.order.errors %}
+                            {{ form.order(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.order.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.order(class="form-control form-control-md", placeholder="Confirm Password") }}
+                        {% endif %}
+                        {{ form.order.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="col-1">
+                    {{ form.submit(class="btn btn-primary")}}
+                </div>
+            </div>
+        </form>
+        <div class="row p-3">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% for post in post_list %}
+            <p style="font-size:22px">Review {{ loop.index }}</h5>
+            <div class="d-flex">
+                <div class="flex-shrink-0">
+                    {% if post[-4] %}
+                        <img src="{{ url_for('static', filename='user')}}/{{post[12]}}/{{ post[-4] }}" style="width:110px; height:145px">
+                    {% endif %}
+                    <br></br>
+                    {% if current_user.role != 'regular' %}
+                        <a href="{{ url_for('privileges.user_profile', user_id=post[12]) }}"
+                            <p style="font-size:14px; text-decoration:none; color:#F9ED69">{{ post[13] }}</p>
+                        </a>  
+                    {% endif %}  
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <div class="row p-1">
+                        <h5> {{post[0]}} <small class="text-muted"><i style="color:#F08A5D">Posted on {{ post[3].strftime("%Y-%m-%d") }}</i></small></h5>
+                    </div>
+                    <div class="row p-1">
+                        <p style="font-size:18px">{{ post[1] }} | {{ post[8] }} | {{ post[10] }} | ${{post[2]}}</p>
+                    </div>
+                    <div class="row p-1">
+                        <p style="font-size:18px"><strong>Restaurant Rating</strong>: {{post[5]}}/5 | <strong>Dish Rating</strong>: {{ post[6]}}/5 | <strong>Value for Money</strong>: {{post[9]}}/5</p>
+                    </div>
+                    <div class="row p-1">
+                        <p style="font-size:18px">{{ post[4] }}</p>
+                    </div>
+                    <div class="row p-1">
+                        {% if post[-2] %}
+                            <div class="col-3">
+                                <a href="{{ url_for('static', filename='post')}}/{{ post[11] }}/{{ post[-2] }}" data-toggle="lightbox">
+                                    <img src="{{ url_for('static', filename='post')}}/{{ post[11] }}/{{ post[-2] }}" width="200" height="150">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if post[-1] %}
+                            <div class="col-3">
+                                <a href="{{ url_for('static', filename='post')}}/{{ post[11] }}/{{ post[-1] }}" data-toggle="lightbox">
+                                    <img src="{{ url_for('static', filename='post')}}/{{ post[11] }}/{{ post[-1] }}" width="200" height="150">
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <form method="post" action="">
+                        <div class="row p-3">
+                            <input type="hidden" name="post_id" value="{{ post[11] }}"/>
+                            {% if current_user.restaurant_id == restaurant_id %}
+                                {% if post[16] %}
+                                    <div class="col-9"></div>
+                                {% else %}
+                                    <div class="col-9">
+                                        <a class="btn btn-info" href="{{ url_for('restaurants.reply_posts_by_id', post_id=post[11]) }}" role="button">Reply</a>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div class="col-9"></div>
+                            {% endif %}
+                            <div class="col-1 text-center">
+                                <button class="btn btn-primary" name="like" value="1">
+                                    <i class="bi bi-hand-thumbs-up"></i>
+                                </button>
+                            </div>
+                            <div class="col-1 text-center">{{ post[7] }}</div>
+                            <div class="col-1 text-center">
+                                <button class="btn btn-danger" name="dislike" value="-1">
+                                    <i class="bi bi-hand-thumbs-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    {% if post[14] %}
+                        <div class="d-flex mt-4">
+                            <div class="flex-shrink-0">
+                                {% if logo_name %}
+                                    <div>
+                                        <img src="{{ url_for('static', filename='restaurant/') }}{{ restaurant.id }}/{{ logo_name }}" alt="" width="100" height="100"></img>
+                                        <br></br>
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <img src="{{ url_for('static', filename='restaurant_logo_default.png') }}" width="100" height="100"></img>
+                                        <br></br>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <div class="row p-1">
+                                    <h5>Response from the restaurant <small class="text-muted"><i style="color:#F08A5D">Posted on {{ post[15].strftime("%Y-%m-%d") }}</i></small></h5>
+                                </div>
+                                <div class="row p-1">
+                                    <div class="col-6">
+                                        <p style="font-size:18px">{{ post[14] }}</p>
+                                    </div>
+                                    <div class="col-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <hr></hr>
+        {% endfor %}
+    </div>
+</div>
+{% if current_user.role != 'restaurant' %}
+    <div class="p-3" style="background-color:#6A2C70">
+        <div class="container p-3" style="color:#F9ED69">
+            <div>
+                <p style="font-size:22px"><strong>Nearby Restaurants in {{suburb}}</strong> </h4>
+            </div>
+            <div class="row p-3">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <div class="row p-3">
+                        {% if restaurants_list|length > 0 %}
+                            {% for element in restaurants_list %}
+                                <div class="col">
+                                    <a href="{{ url_for('restaurants.restaurant', restaurant_id=element[0])}}" style="color:#F9ED69; text-decoration:none">
+                                        <span style="font-size:18px">{{element[1]}}</span>
+                                    </a><span style="font-size:18px">({{element[2]}} reviews)</span>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="text-center">
+                                <p style="font-size:18px"><em>No other restaurants avaliable. Please check this page again later.</em></p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

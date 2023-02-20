@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69;">
+    <br></br>
+    <br></br>
+    <div class="text-center">
+        <h1>Search to find a dish</h1>
+        <br></br>
+        <div class="container p-3" style="width:700px">
+            <form method="POST", action="">
+                {{ form.hidden_tag() }}
+                <div class="p-3">
+                    {% if form.dish.errors %}
+                        {{ form.dish(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.dish.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.dish(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="p-3 text-center">
+                    {{ form.submit(class="btn btn-primary col-12")}}
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if dish_type %}
+        <br></br>
+    {% else %}
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+    {% endif %}
+</div>
+{% if dish_type %}
+    <div style="background-color:#6A2C70; color:#F9ED69; min-height:450px">
+        <div class="container p-3">
+            <p style="font-size:22px">You have searched for: {{ dish_type.type }}</p>
+            <p style="font-size:18px">{{ dish_type.overview }}</p>
+            <p style="font-size:18px">For more information regarding this dish type visit:</p>
+            <br></br>
+            <div class="text-center">
+                <a class="btn btn-primary" href="{{ url_for('dishes.dish', dish_id=dish_type.id)}}">
+                    {{ dish_type.type }} Information
+                </a>
+            </div>
+            <br></br>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

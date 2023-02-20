@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color: #B83B5E; min-height:900px">
+    <div class="container p-3" style="color:#F9ED69; width: 1400px">
+        <div class="text-center">
+            <h1>User Database</h1>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table" style="color:#4b6d7c">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Location</th>
+                            <th>Post Count</th>
+                            <th>User Information</th>
+                            <th>User Posts</th>
+                            <th>User Dashboard</th>
+                            <th>User Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in profile_settings %}
+                        <tr>
+                            <th>{{ user[0] }}</th>
+                            <th>{{ user[1] }}</th>
+                            <th>{{ user[2] }}</th>
+                            <th>{{ user[3] }}</th>
+                            <th>{{ user[5] }}</th>
+                            <th><a href="{{ url_for('privileges.user_profile', user_id=user[0]) }}" style="color:#F9ED69;">Information</a></th>
+                            <th><a href="{{ url_for('privileges.user_posts', user_id=user[0]) }}" style="color:#F9ED69;">Posts</a></th>
+                            <th><a href="{{ url_for('privileges.user_dashboard', user_id=user[0]) }}" style="color:#F9ED69;">Dashboard</a></th>
+                            <th>{{ user[4] }}</th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends "layout_login.html" %}
+{% block content %}
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<div class="container p-3 rounded-3" style="background-color:#B83B5E; color:#F9ED69; width:500px">
+    <div class="text-center">
+        <img src="{{ url_for('static', filename='title.png') }}"></img>
+    </div>
+    <br></br>
+    <div class="text-center"> 
+        <p style="font-size:18px"><strong>Please change the status of the feedback response below.</strong></p>
+    </div>
+    <div class="container"> 
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="mb-3 p-3">
+                <div class="form-floating">
+                    {% if form.status.errors %}
+                        {{ form.status(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.status.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.status(class="form-control form-control-md") }}
+                    {% endif %}
+                    {{ form.status.label(class="form-control-label") }}
+                </div>
+            </div>
+            <div class="mb-3 p-3 text-center">
+                {{ form.submit(class="btn btn-primary col-12")}}
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-3">
+            <a href="{{ url_for('privileges.notifications_admin') }}">
+                <i class="bi bi-arrow-left" style="font-size:30px; color:#F9ED69"></i>
+            </a>
+        </div>
+        <div class="col-2"></div>
+        <div class="col">
+            <a href="{{ url_for('main.home') }}">
+                <i class="bi bi-house" style="font-size:30px; color:#F9ED69"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

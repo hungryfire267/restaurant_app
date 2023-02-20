@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3" style="width:700px">
+        <div class="text-center">
+            <h1>Search to find a restaurant</h1>
+            <br></br>
+            <p style="font-size:18px"><strong>Please enter part of or a whole restaurant name.</strong></p>
+            <br></br>
+        </div>
+        <form method="POST", action="">
+            {{ form.hidden_tag() }}
+            <div class="mb-3 p-3">
+                {% if form.name.errors %}
+                    {{ form.name(class="form-control form-control-lg is-invalid") }}  
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.name(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="mb-3 p-3 text-center">
+                {{ form.submit(class="btn btn-primary col-12")}}
+            </div>
+        </form>
+    </div>
+</div>
+<div style="background-color:#6A2C70; min-height: 450px; color:#F9ED69">
+    <div class="container p-3">
+        <p style="font-size:22px"><strong>Restaurant Results</strong></p>
+        {% if restaurants is not none %}
+            {% for element in restaurants %}
+                <p style="font-size:22px">Restaurant {{ loop.index }}</p>
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        {% if element[6] %}
+                            <img src="{{ url_for('static', filename='restaurant') }}/{{element[0]}}/{{element[6]}}" width="200" height="200">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='restaurant_logo_default.png')}}" width="200" height="200">
+                        {% endif %}
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <p style="font-size:22px">{{ element[1] }}</p>
+                        <div class="row">
+                            <div class="col">
+                                <p style="font-size:18px">
+                                    {{ element[4] }}  Restaurant
+                                </p>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-primary" href="{{ url_for('restaurants.restaurant', restaurant_id=element[0]) }}" role="button">
+                                    Restaurant Information
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p style="font-size:18px"><em>{{ element[2] }}</em></p>
+                        </div>
+                        <div class="row">
+                            <p style="font-size:18px">{{ element[3] }}</p>
+                        </div>
+                        <div class="row">
+                            <p style="font-size:18px">{{ element[5] }}/5</p>
+                        </div>
+                    </div>
+                </div>
+                <hr></hr>
+            {% endfor %}
+        {% else %}
+            <br></br>
+            <br></br>
+            <div class="text-center">
+                <p style="font-size:18px"><em>None avaliable at this time</em></p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

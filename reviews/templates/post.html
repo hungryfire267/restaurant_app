@@ -1,0 +1,281 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container text-center p-3" style="width:700px">
+        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+        <h1>Post A Review </h1>
+        <p style="font-size:18px">It allows you to share your experiences with other people</p>
+        <p style="font-size:18px">It allows others to share their experiences with you</p>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69">
+    <div class="container" style="width:800px">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
+            <fieldset class="mb-3 p-3">
+                <div class="text-center">
+                    <legend>Form</legend>
+                </div>
+                <div class="text-center p-3">
+                    <p style="font-size:18px">If your are using this form for the first time, please click the button below to get started.</p>
+                    <br></br>
+                    <a class="btn btn-primary" href="post_review/get_started" role="button">Get Started</a>
+                    <br></br>
+                </div>
+                <div class="text-center">
+                    <p style="font-size:18px"><strong>Introduction</strong></p>
+                </div>
+                <div class="mb-3 p-3">
+                    <div class="form-floating">
+                        {% if form.title.errors %}
+                        {{ form.title(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ form.title(class="form-control form-control-lg", maxlength="120") }}
+                        {% endif %}
+                        {{ form.title.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p style="font-size:18px"><strong>The Restaurant</strong></p>
+                </div>
+                <div class="row mb-3 p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.restaurant.errors %}
+                            {{ form.restaurant(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.restaurant.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form.restaurant(class="form-control form-control-lg", maxlength="120") }}
+                            {% endif %}
+                            {{ form.restaurant.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.restaurant_cuisine.errors %}
+                                {{ form.restaurant_cuisine(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.restaurant_cuisine.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.restaurant_cuisine(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.restaurant_cuisine.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 p-3">
+                    <div class="form-floating">
+                        {% if form.restaurant_address.errors %}
+                            {{ form.restaurant_address(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.restaurant_address.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.restaurant_address(class="form-control form-control-lg", maxlength="120") }}
+                        {% endif %}
+                        {{ form.restaurant_address.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="row mb-3 p-3"> 
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="form-floating">
+                                {% if form.phone_number.errors %}
+                                    {{ form.phone_number(class="form-control form-control-lg is-invalid") }}  
+                                    <div class="invalid-feedback">
+                                        {% for error in form.phone_number.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.phone_number(class="form-control form-control-lg rounded-3", maxlength="8") }}
+                                {% endif %}
+                                {{ form.phone_number.label(class="form-control-label") }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.restaurant_rating.errors %}
+                                {{ form.restaurant_rating(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.restaurant_rating.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.restaurant_rating(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.restaurant_rating.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p style="font-size:18px"><strong>The Dish</strong></p>
+                </div>
+                <div class="row mb-3 p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.dish.errors %}
+                                {{ form.dish(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.dish.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.dish(class="form-control form-control-lg", maxlength="120") }}
+                            {% endif %}
+                            {{ form.dish.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.value.errors %}
+                                {{ form.value(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.value.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.value(class="form-control form-control-md", maxlength="120") }}
+                            {% endif %}
+                            {{ form.value.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3 p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.dish_type.errors %}
+                                {{ form.dish_type(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.dish_type.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.dish_type(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.dish_type.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.dish_size.errors %}
+                                {{ form.dish_size(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.dish_cost.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.dish_size(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.dish_size.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3 p-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.dish_rating.errors %}
+                                {{ form.dish_rating(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.dish_rating.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.dish_rating(class="form-control form-control-md") }}
+                            {% endif %}
+                            {{ form.dish_rating.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            {% if form.dish_cost.errors %}
+                                {{ form.dish_cost(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.dish_cost.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.dish_cost(class="form-control form-control-lg") }}
+                            {% endif %}
+                            {{ form.dish_cost.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p style="font-size:18px"><strong>Images</strong></p>
+                    <p style="font-size:18px">Posting images aren't compulsory</p>
+                </div>
+                <div class="mb-3 p-3">
+                    <p>Restaurant Image</p>
+                    {% if form.restaurant_image.errors %}
+                        {{ form.restaurant_image(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.restaurant_image.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.restaurant_image(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="mb-3 p-3">
+                    <p>Dish Image</p>
+                    {% if form.dish_image.errors %}
+                        {{ form.dish_image(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.dish_image.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.dish_image(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="text-center">
+                    <p style="font-size:18px"><strong>Comments</strong></p>
+                </div>
+                <div class="mb-3 p-3">
+                    {% if form.content.errors %}
+                        {{ form.content(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.dish_cost.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.content(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="mb-3 p-3 text-center">
+                    {{ form.submit(class="btn btn-primary col-12")}}
+                </div>
+            </fieldset>
+        </form>
+        <br></br>
+    </div>
+</div>
+
+{% endblock content %}

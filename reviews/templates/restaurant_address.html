@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E;">
+    <br></br>
+    <br></br>
+    <br></br>
+    <div class="container p-3 rounded-3" style="background-color:#6A2C70; width: 800px; color:#F9ED69">
+        <div class="container" style="width:700px">
+            <div class="text-center">
+                <h1>Change your restaurant address</h1>
+                <br></br>
+                <p style="font-size:18px"><strong>Please input your new address below.</strong></p>
+            </div>
+            <br></br>
+            <div class="row p-1">
+                <div class="col">
+                    <p style="font-size:22px">Current Address</p>
+                </div>
+                <div class="col">
+                    <p style="font-size:18px">{{ restaurant.address }}</p>
+                </div>
+            </div>
+            <br></br>
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="row p-1">
+                    <div class="mb-3 p-3">
+                        <div class="form-floating">
+                            {% if form.address.errors %}
+                                {{ form.address(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.address.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.address(class="form-control form-control-lg", maxlength="120") }}
+                            {% endif %}
+                            {{ form.address.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-1">
+                    <div class="mb-3 p-3 text-center">
+                        {{ form.submit(class="btn btn-primary col-12")}}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+</div>
+{% endblock content %}

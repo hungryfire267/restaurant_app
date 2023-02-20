@@ -1,0 +1,16 @@
+{% extends "layout_login.html" %}
+{% block content %}
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<div class="container mb-3 p-3 text-center rounded-4" style="background-color:rgb(21, 21, 116); color:white">
+    <h3> Edit Post Page Doesn't Exist</h3>
+    <br></br>
+    <br></br>
+    <p> To edit a particular post please navigate to the following link: </p>
+    <br></br>
+    <a href="{{ url_for('users.account_posts') }}" class="btn btn-primary">Your Profile Posts</a>
+</div>
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E">
+    <br></br>
+    <br></br>
+    <div class="container p-3" style="background-color:#6A2C70; width: 800px;color:#F9ED69">
+        <div class="container" style="width:700px">
+            <div class="text-center">
+                <h1>Restaurant Logo Form</h1>
+                <br></br>
+                <p style="font-size:18px">All images must have an extension of .jpg, .png or .jpeg</p>
+            </div>
+            <div class="text-center">
+                {% if name %}
+                    <img src="{{ url_for('static', filename='restaurant') }}/{{ current_user.restaurant_id }}/{{name}}" width="300" height="300">
+                {% else %}
+                    <img src="{{ url_for('static', filename='restaurant_logo_default.png') }}" width="300" height="300">
+                {% endif %}
+                <br></br>
+            </div>
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                {{ form.csrf_token }}
+                <div class="mb-3 p-3">
+                    {% if form.logo.errors %}
+                        {{ form.logo(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.logo.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.logo(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="mb-3 p-3 text-center">
+                    {{ form.submit(class="btn btn-primary col-12")}}
+                </div>
+            </form>
+        </div>
+    </div>
+    <br></br>
+    <br></br>
+</div>
+{% endblock content %}

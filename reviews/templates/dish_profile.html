@@ -1,0 +1,245 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3">
+        <div class="text-center">
+            <h2>{{ dish_type.type }}</h2>
+        </div>
+        <div class="row p-1">
+            <p style="font-size:22px"><strong>Overview</strong></p>
+            <p style="font-size:18px">{{ dish_type.overview }}</p>
+        </div>
+        <div class="row p-1">
+            <p style="font-size:22px"><strong>Most common dishes of this type</strong></p>
+            <ul style="font-size:18px">
+                {% for dish in top_3 %}
+                    {% if (dish[1] < 2) %}
+                        <li>{{ dish[0] }} ({{dish[1]}} review)</li>
+                    {% else %}
+                        <li>{{ dish[0] }} ({{dish[1]}} reviews)</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="row p-1">
+            <p style="font-size:22px"><strong>Most Popular restaurants that serve {{ dish_type.type }}</strong></p>
+            <ul style="font-size:18px">
+                {% for dish in top_3_restaurants %}
+                    {% if (dish[1] < 2) %}
+                        <li>{{ dish[0] }} ({{dish[1]}} review)</li>
+                    {% else %}
+                        <li>{{ dish[0] }} ({{dish[1]}} reviews)</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<div style="background-color:#6A2C70; color:#F9ED69">
+    <div class="container p-3">
+        <div class="row p-1">
+            <p style="font-size:22px"><strong>A gallery of the dishes</strong></p>
+            <br></br>
+        </div>  
+        {% if dish_images|length < 3 %}
+            <div class="text-center p-1">
+                <p style="font-size:18px"><em>Not enough images avaliable</em></p>
+            </div>
+            <br></br>
+        {% else %}
+            <div class="row p-1">
+                {% for image in dish_images %}
+                    {% if image[3] %}
+                        <a href="{{ url_for('static', filename='post') }}/{{ image[0] }}/{{ image[2] }}" data-toggle="lightbox" data-gallery="dish_profile" class="col-4">
+                            <img src="{{ url_for('static', filename='post') }}/{{ image[0] }}/{{ image[2] }}" class="img-fluid" style="height:300px; width:400px;">
+                        </a>
+                    {% else %}
+                        <div data-toggle="lightbox" data-gallery="dish_profile" data-src="{{ url_for('static', filename='post') }}/{{ image[0] }}/{{ image[2] }}" data-title="Hidden item 1"></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+<div style="background-color:#B83B5E; color:#F9ED69">
+    <div class="container p-3">
+        <div class="row p-1">
+            <p style="font-size:22px"><strong>Reviews</strong></p>
+        </div>
+        <div class="row p-1">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <div class="row p-3">
+                    <div class="col-3">Search By</div>
+                    <div class="col-3"></div>
+                    <div class="col-3">
+                        Order By
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            {% if form.dish.errors %}
+                                {{ form.dish(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.dish.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.dish(class="form-control form-control-lg", placeholder="Confirm Password") }}
+                            {% endif %}
+                            {{ form.dish.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            {% if form.restaurant.errors %}
+                                {{ form.restaurant(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.restaurant.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.restaurant(class="form-control form-control-lg", placeholder="Confirm Password") }}
+                            {% endif %}
+                            {{ form.restaurant.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            {% if form.sort.errors %}
+                                {{ form.sort(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.sort.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sort(class="form-control form-control-md", id="sort") }}
+                            {% endif %}
+                            {{ form.sort.label(class="form-control-label") }}
+                        </div>
+                    </div>
+                    <div class="col-2" id="order">
+                        <div class="form-floating">
+                            {% if form.order.errors %}
+                                {{ form.order(class="form-control form-control-lg is-invalid") }}  
+                                <div class="invalid-feedback">
+                                    {% for error in form.order.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.order(class="form-control form-control-md", id="order") }}
+                            {% endif %}
+                            {{ form.order.label(class="form-control-label") }}
+                        </div>
+                    </div>  
+                    <div class="col-1">
+                        {{ form.submit(class="btn btn-primary")}}
+                    </div>
+                </div>
+            </form>
+            <br></br>   
+            <div class="row p-3">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            {% for review in dish_posts %}
+                <p style="font-size:22px">Review {{ loop.index }}</p>
+                <div class="d-flex">
+                    <div class="flex-shrink-0 p-1">
+                        {% if review[-4] %}
+                            <img src="{{ url_for('static', filename='user')}}/{{ review[12] }}/{{ review[-4]}}" style="width:110px; height:145px">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='default_user_profile.jpg')}}" style="width:110px; height:145px">
+                        {% endif %}
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h5> {{review[2]}} <small class="text-muted"><i style="color:#F08A5D">Posted on {{ review[9].strftime("%Y-%m-%d") }}</i></small></h5>
+                        <div class="row p-1">
+                            <p style="font-size:18px">
+                                {{ review[10] }}
+                            </p>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px">{{ review[1]}} | {{ review[7] }} | ${{ review[5] }}</p>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px"><strong>Restaurant Rating</strong>: {{ review[3] }} | <strong>Dish Rating</strong>: {{ review[4] }} | <strong>Value for Money</strong>: {{ review[6] }}</p>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px">{{ review[8] }}</p>
+                        </div>
+                        <div class="row p-1">
+                            {% if review[-1] %}
+                                <div class="col-3">
+                                    <a href="{{ url_for('static', filename='post')}}/{{ review[11] }}/{{ review[-1] }}" data-toggle="lightbox">
+                                        <img src="{{ url_for('static', filename='post')}}/{{ review[11] }}/{{ review[-1] }}" width="200" height="150">
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <form method="post" action="">
+                            <div class="row p-3">
+                                <input type="hidden" name="post_id" value="{{ review[11] }}"/>
+                                <div class="col-9"></div>
+                                <div class="col-1 text-center">
+                                    <button class="btn btn-primary" name="like" value="1">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                    </button>
+                                </div>
+                                <div class="col-1 text-center">{{ review[16] }}</div>
+                                <div class="col-1 text-center">
+                                    <button class="btn btn-danger" name="dislike" value="-1">
+                                        <i class="bi bi-hand-thumbs-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <br></br>
+                        {% if review[14] %}
+                            <div class="d-flex mt-4">
+                                <div class="flex-shrink-0">
+                                    {% if review[-3] %}
+                                        <div>
+                                            <img src="{{ url_for('static', filename='restaurant/') }}{{ review[13] }}/{{ review[-3] }}" alt="" width="100" height="100"></img>
+                                            <br></br>
+                                        </div>
+                                    {% else %}
+                                        <div>
+                                            <img src="{{ url_for('static', filename='restaurant_logo_default.png') }}" width="100" height="100"></img>
+                                            <br></br>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <div class="row p-1">
+                                        <h5>Response from the restaurant <small class="text-muted"><i style="color:#F08A5D">Posted on {{ review[15].strftime("%Y-%m-%d") }}</i></small></h5>
+                                    </div>
+                                    <div class="row p-1">
+                                        <div class="col-6">
+                                            <p style="font-size:18px">{{ review[14] }}</p>
+                                        </div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr></hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

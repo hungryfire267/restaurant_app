@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; color: #F9ED69">
+    <div class="container p-3 rounded-3" style="width: 1000px">
+        <h1 class="text-center">Application for a user to represent a restaurant</h1>
+        <div>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <div class="mb-3 p-3">
+                    <div class="form-floating">
+                        {% if form.name.errors %}
+                            {{ form.name(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.name(class="form-control form-control-lg") }}
+                        {% endif %}
+                        {{ form.name.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="mb-3 p-3" id="restaurant">
+                    <div class="form-floating">
+                        {% if form.restaurant.errors %}
+                            {{ form.restaurant(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.restaurant.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.restaurant(class="form-control form-control-lg", id="restaurant") }}
+                        {% endif %}
+                        {{ form.restaurant.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="mb-3 p-3">
+                    <div class="form-floating">
+                        {% if form.address.errors %}
+                            {{ form.address(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.address.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.address(class="form-control form-control-lg") }}
+                        {% endif %}
+                        {{ form.address.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="mb-3 p-3">
+                    <p style="font-size:18px">{{ form.info.label(class="form-control-label") }}</p>
+                    {% if form.info.errors %}
+                        {{ form.info(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.info.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.info(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="mb-3 p-3">
+                    <p style="font-size:18px">{{ form.explanation.label(class="form-control-label") }}</p>
+                    {% if form.explanation.errors %}
+                        {{ form.explanation(class="form-control form-control-lg is-invalid") }}  
+                        <div class="invalid-feedback">
+                            {% for error in form.explanation.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.explanation(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="mb-3 p-3 text-center">
+                    {{ form.submit(class="btn btn-primary col-12")}}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

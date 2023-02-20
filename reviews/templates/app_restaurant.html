@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="background-color:#B83B5E; min-height:900px; color:#F9ED69">
+    <div class="container p-3">
+        <div class="text-center">
+            <h1>User applications for {{ current_user.username}}</h1>
+        </div>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="row p-1">
+                <div class="col-3"></div>
+                <div class="col-4">
+                </div>
+                <div class="col-4">
+                    <div class="form-floating">
+                        {% if form.search.errors %}
+                            {{ form.search(class="form-control form-control-lg is-invalid") }}  
+                            <div class="invalid-feedback">
+                                {% for error in form.search.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.search(class="form-control form-control-lg") }}
+                        {% endif %}
+                        {{ form.search.label(class="form-control-label") }}
+                    </div>
+                </div>
+                <div class="col-1">
+                    {{ form.submit(class="btn btn-primary")}}
+                </div>
+            </div>
+        </form>
+        <br></br>
+        {% if app_list|length < 1 %}
+            <br></br>
+            <div class="text-center">
+                <p style="font-size:18px"><em>No applications seen.</em></p>
+            </div>
+        {% else %}
+            <p style="font-size:18px">All posts are sorted by date (latest date first).</p>
+            {% for post in app_list %}
+                <p style="font-size:22px">Application {{ loop.index }}</p>
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        {% if user_pic %}
+                            <img src="{{ url_for('static', filename='user') }}/{{ current_user.id }}/{{ user_pic }}" style="width:110px; height:145px">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='default_user_profile.jpg') }}" style="width:110px; height:145px">
+                        {% endif %} 
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <div class="row p-1">
+                            <h5>Application for {{ post[0] }} <small class="text-muted"><i style="color:#F08A5D">Posted on {{ post[5].strftime("%Y-%m-%d") }}</i></small></h5>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px"><em>Address</em>: {{ post[1] }}</p>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px"><em>Restaurant Overview</em>: {{ post[2] }}</p>
+                        </div>
+                        <div class="row p-1">
+                            <p style="font-size:18px"><em>Explanation</em>: {{ post[3] }}</p>
+                        </div>
+                        {% if post[4] == 'Resolved' %}
+                            <div class="d-flex mt-4">
+                                <div class="flex-shrink-0">
+                                    <img src="{{ url_for('static', filename='default_user_profile.jpg')}}" style="width:110px; height:145px">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <div class="row p-1">
+                                        <h5>From the administrator  <small class="text-muted"><i style="color:#F08A5D">Posted on {{ post[5].strftime("%Y-%m-%d") }}</i></small></h5>
+                                    </div>
+                                    <div class="row p-1">
+                                        <p style="font-size:18px"><em>Status</em>: {{ post[6] }}</p>
+                                    </div>
+                                    <div class="row p-1">
+                                        <p style="font-size:18px">{{ post[7] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr></hr>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
